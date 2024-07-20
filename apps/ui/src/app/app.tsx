@@ -1,14 +1,18 @@
-import styled from 'styled-components';
+import { Routes, Route } from 'react-router-dom'
 
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { StyleWrapper } from '@hacker-news/ui-components'
 
-export function App() {
+import HomePage from '../pages/home'
+import StarredPage from '../pages/starred'
+
+export const App = () => {
   return (
-    <StyledApp>
-      <div>Hello World!</div>
-    </StyledApp>
+    <StyleWrapper>
+      <Routes>
+        <Route path='/starred' Component={StarredPage} />
+        <Route path='/' Component={HomePage} />
+      </Routes>
+    </StyleWrapper>
   );
 }
 
