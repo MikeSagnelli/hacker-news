@@ -10,6 +10,7 @@ export interface ITheme {
   global: {
     primaryColor: string;
     secondaryColor: string;
+    darkenedSecondaryColor: string;
   };
 }
 
@@ -26,6 +27,7 @@ export const theme = {
     global: {
       primaryColor: 'rgba(255,255,255,1)',
       secondaryColor: 'rgba(254,113,57,1)',
+      darkenedSecondaryColor: 'rgba(194,64,13,1)',
     },
   },
   dark: {
@@ -40,6 +42,7 @@ export const theme = {
     global: {
       primaryColor: 'rgba(30,32,37,1)',
       secondaryColor: 'rgba(254,113,57,1)',
+      darkenedSecondaryColor: 'rgba(194,64,13,1)',
     },
   },
 };
