@@ -1,8 +1,10 @@
 import type { ReactNode } from 'react'
 import { createContext, useContext, useState } from 'react'
-import ThemeProvider from '@mui/system/ThemeProvider'
+import CssBaseline from '@mui/material/CssBaseline';
+import GlobalStyles from '@mui/system/GlobalStyles';
 import type { ITheme } from '../../../theme'
-import { theme } from '../../../theme'
+import { createGlobalStyles, theme } from '../../../theme'
+
 
 interface IStyleWrapper {
   children: ReactNode
@@ -18,11 +20,13 @@ const CustomThemeContext = createContext<IThemeContext | undefined>(undefined)
 export const StyleWrapper = ({ children }: IStyleWrapper) => {
   const [currentTheme, setCurrentTheme] = useState(theme.light)
 
+  const globalStyles = createGlobalStyles(currentTheme)
+
   return (
     <CustomThemeContext.Provider value={{ currentTheme, setCurrentTheme }}>
-      <ThemeProvider theme={currentTheme}>
-        {children}
-      </ThemeProvider>
+      <CssBaseline />
+      <GlobalStyles styles={globalStyles}/>
+      {children}
     </CustomThemeContext.Provider>
   )
 }
