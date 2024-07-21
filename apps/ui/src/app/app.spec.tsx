@@ -3,16 +3,16 @@ import { MemoryRouter } from 'react-router-dom';
 import App from './app';
 
 describe('App', () => {
-  test('renders HomePage component for the default route', () => {
+  test('renders without crashing', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter>
         <App />
       </MemoryRouter>
     );
-    expect(screen.getByText(/Home page/i)).toBeInTheDocument();
+    expect(screen.getByText(/Latest page/i)).toBeInTheDocument();
   });
 
-  test('renders StarredPage component for the /starred route', () => {
+  test('renders StarredPage for "/starred" route', () => {
     render(
       <MemoryRouter initialEntries={['/starred']}>
         <App />

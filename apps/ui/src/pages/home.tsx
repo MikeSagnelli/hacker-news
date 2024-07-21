@@ -1,21 +1,11 @@
-import { HackerNewsLogo, Navigation } from '@hacker-news/ui-components';
+import { MainLayout } from '@hacker-news/ui-components';
 
-export const HomePage = () => (
-  <>
-    <HackerNewsLogo />
-    <Navigation
-      routes={[
-        {
-          url: '/',
-          label: 'latest',
-        },
-        {
-          url: '/starred',
-          label: 'starred',
-        },
-      ]}
-    />
-  </>
-);
+export const HomePage = () => {
+  return (
+    <MainLayout>
+      <div>Latest page</div>
+    </MainLayout>
+  );
+};
 
 export default HomePage;

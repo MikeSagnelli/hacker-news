@@ -1,8 +1,11 @@
 export interface ITheme {
+  mode: string;
   typography: {
     primaryColor: string;
     secondaryColor: string;
     accentColor: string;
+    primaryFontFamily: string;
+    secondaryFontFamily: string;
   };
   global: {
     primaryColor: string;
@@ -12,10 +15,13 @@ export interface ITheme {
 
 export const theme = {
   light: {
+    mode: 'light',
     typography: {
       primaryColor: 'rgba(0,0,0,1)',
       secondaryColor: 'rgba(0,0,0,0.5)',
       accentColor: 'rgba(254,113,57,1)',
+      primaryFontFamily: '"Open Sans", sans-serif',
+      secondaryFontFamily: '"Ubuntu Mono", monospace',
     },
     global: {
       primaryColor: 'rgba(255,255,255,1)',
@@ -23,10 +29,13 @@ export const theme = {
     },
   },
   dark: {
+    mode: 'dark',
     typography: {
       primaryColor: 'rgba(255,255,255,1)',
       secondaryColor: 'rgba(255,255,255,0.5)',
       accentColor: 'rgba(254,113,57,1)',
+      primaryFontFamily: '"Open Sans", sans-serif',
+      secondaryFontFamily: '"Ubuntu Mono", monospace',
     },
     global: {
       primaryColor: 'rgba(30,32,37,1)',

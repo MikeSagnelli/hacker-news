@@ -12,25 +12,30 @@ interface INavigation {
   }[];
 }
 
-const Nav = styled(Grid)<{ $theme: ITheme }>`
-  padding-inline: 10px;
-
-  &:not(:first-child) {
-    border-left: 1px solid ${({ $theme }) => $theme?.typography.primaryColor};
-  }
-`;
+const Nav = styled(Grid, {
+  shouldForwardProp: (prop) => prop !== 'currentTheme',
+})<{ currentTheme: ITheme }>(({ currentTheme }) => ({
+  paddingInline: '10px',
+  '&:not(:first-of-type)': {
+    borderLeft: `1px solid ${currentTheme?.typography.primaryColor}`,
+  },
+}));
 
 export const Navigation = ({ routes }: INavigation) => {
   const { pathname } = useLocation();
   const { currentTheme } = useCustomTheme();
 
   return (
-    <Grid container direction="row">
+    <Grid container direction="row" width="fit-content">
       {routes.map(({ url, label }, index) => {
         const isCurrentPathname = pathname === url;
 
         return (
-          <Nav $theme={currentTheme} item key={`nav-${url}-${label}-${index}`}>
+          <Nav
+            currentTheme={currentTheme}
+            item
+            key={`nav-${url}-${label}-${index}`}
+          >
             <TextLink
               url={url}
               color={
@@ -38,7 +43,9 @@ export const Navigation = ({ routes }: INavigation) => {
                   ? currentTheme.typography.accentColor
                   : undefined
               }
-              fontWeight={isCurrentPathname ? 700 : undefined}
+              fontFamily={currentTheme.typography.primaryFontFamily}
+              fontSize={14}
+              fontWeight={isCurrentPathname ? 800 : undefined}
             >
               {label}
             </TextLink>

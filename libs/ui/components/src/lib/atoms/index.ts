@@ -1,3 +1,3 @@
 export * from './text-link';
-export * from './logo';
+export * from './graphics';
 export * from './style-wrapper';

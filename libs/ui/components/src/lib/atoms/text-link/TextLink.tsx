@@ -36,3 +36,5 @@ export const TextLink = ({ url, children, color, ...props }: ILink) => {
     </StyledLink>
   );
 };
+
+export default TextLink;

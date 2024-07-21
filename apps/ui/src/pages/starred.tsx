@@ -1,5 +1,11 @@
-import { HackerNewsLogo } from '@hacker-news/ui-components';
+import { MainLayout } from '@hacker-news/ui-components';
 
-export const StarredPage = () => <HackerNewsLogo />;
+export const StarredPage = () => {
+  return (
+    <MainLayout>
+      <div>Starred page</div>
+    </MainLayout>
+  );
+};
 
 export default StarredPage;
