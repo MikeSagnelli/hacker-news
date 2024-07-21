@@ -1,5 +1,5 @@
-export const StarredPage = () => (
-  <div>Starred Page</div>
-)
+import { HackerNewsLogo } from '@hacker-news/ui-components';
 
-export default StarredPage
+export const StarredPage = () => <HackerNewsLogo />;
+
+export default StarredPage;

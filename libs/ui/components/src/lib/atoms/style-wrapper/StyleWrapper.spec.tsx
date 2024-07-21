@@ -25,20 +25,26 @@ describe('StyleWrapper', () => {
         <TestComponent />
       </StyleWrapper>
     );
-    expect(screen.getByRole('button', { name: /Change Theme/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /Change Theme/i })
+    ).toBeInTheDocument();
   });
 
   test('useCustomTheme throws error when used outside of StyleWrapper', () => {
     const consoleError = console.error;
     console.error = jest.fn(); // Suppress error output in test
 
-    expect(() => render(<TestComponent />)).toThrow('useCustomTheme must be used within a StyledWrapper');
+    expect(() => render(<TestComponent />)).toThrow(
+      'useCustomTheme must be used within a StyledWrapper'
+    );
 
     console.error = consoleError; // Restore original console.error
   });
 
   test('setCurrentTheme correctly updates current theme', () => {
-    const { result } = renderHook(() => useCustomTheme(), { wrapper: StyleWrapper });
+    const { result } = renderHook(() => useCustomTheme(), {
+      wrapper: StyleWrapper,
+    });
     expect(result.current.currentTheme).toBe(theme.light);
 
     act(() => {

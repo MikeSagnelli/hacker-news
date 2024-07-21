@@ -1,1 +1,1 @@
-export * from './StyleWrapper'
+export * from './StyleWrapper';

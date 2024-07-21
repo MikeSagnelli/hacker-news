@@ -8,7 +8,7 @@ export interface ITheme {
     primaryColor: string;
     secondaryColor: string;
   };
-};
+}
 
 export const theme = {
   light: {
@@ -32,8 +32,8 @@ export const theme = {
       primaryColor: 'rgba(30,32,37,1)',
       secondaryColor: 'rgba(254,113,57,1)',
     },
-  }
-}
+  },
+};
 
 export const createGlobalStyles = (currentTheme: ITheme) => ({
   body: {
@@ -48,6 +48,6 @@ export const createGlobalStyles = (currentTheme: ITheme) => ({
     ].join(','),
     fontSize: '18px',
     fontWeight: 400,
-    lineHeight: 1
-  }
-})
+    lineHeight: 1,
+  },
+});

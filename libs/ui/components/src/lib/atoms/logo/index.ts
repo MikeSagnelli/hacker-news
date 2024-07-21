@@ -1,1 +1,1 @@
-export * from './HackerNewsLogo'
+export * from './HackerNewsLogo';

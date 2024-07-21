@@ -1,2 +1,2 @@
-export * from './lib'
-export * from './theme'
+export * from './lib';
+export * from './theme';
