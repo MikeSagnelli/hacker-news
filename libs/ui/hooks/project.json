@@ -1,6 +1,6 @@
 {
   "name": "ui-hooks",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/ui/hooks/src",
   "projectType": "library",
   "tags": [],

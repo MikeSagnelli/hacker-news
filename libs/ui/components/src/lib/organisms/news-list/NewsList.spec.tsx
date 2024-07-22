@@ -1,46 +1,55 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import NewsList from './NewsList';
 import { StyleWrapper } from '../../atoms';
+import * as hooks from '@hacker-news/ui-hooks';
+import { MemoryRouter } from 'react-router-dom';
 
 const mockNews = [
   {
     id: 1,
-    index: 1,
     title: 'Test Title 1',
     url: 'http://example.com/1',
     score: 100,
     author: 'Author 1',
-    time: '1 hour ago',
+    time: 11111111,
     comments: 50,
     starred: false,
-    starPost: jest.fn(),
   },
   {
     id: 2,
-    index: 2,
     title: 'Test Title 2',
     url: 'http://example.com/2',
     score: 200,
     author: 'Author 2',
-    time: '2 hours ago',
+    time: 11111111,
     comments: 100,
     starred: true,
-    starPost: jest.fn(),
   },
 ];
 
 const mockGetMoreNews = jest.fn();
+jest.mock('@hacker-news/ui-hooks'); // Mock the hook
 
 describe('NewsList Component', () => {
+  const mockStarNews = {
+    starredNews: [],
+    starNews: jest.fn(),
+  };
+
+  beforeEach(() => {
+    jest.spyOn(hooks, 'useStarredNews').mockReturnValue(mockStarNews);
+  });
   it('renders correctly with given props', () => {
     render(
-      <StyleWrapper>
-        <NewsList
-          news={mockNews}
-          getMoreNews={mockGetMoreNews}
-          loadingNews={false}
-        />
-      </StyleWrapper>
+      <MemoryRouter>
+        <StyleWrapper>
+          <NewsList
+            news={mockNews}
+            getMoreNews={mockGetMoreNews}
+            loadingNews={false}
+          />
+        </StyleWrapper>
+      </MemoryRouter>
     );
 
     expect(screen.getByText('Test Title 1')).toBeInTheDocument();
@@ -50,13 +59,15 @@ describe('NewsList Component', () => {
 
   it('calls getMoreNews function when "show more" button is clicked', () => {
     render(
-      <StyleWrapper>
-        <NewsList
-          news={mockNews}
-          getMoreNews={mockGetMoreNews}
-          loadingNews={false}
-        />
-      </StyleWrapper>
+      <MemoryRouter>
+        <StyleWrapper>
+          <NewsList
+            news={mockNews}
+            getMoreNews={mockGetMoreNews}
+            loadingNews={false}
+          />
+        </StyleWrapper>
+      </MemoryRouter>
     );
 
     const showMoreButton = screen.getByText('show more');
@@ -67,16 +78,30 @@ describe('NewsList Component', () => {
 
   it('disables "show more" button when loadingNews is true', () => {
     render(
-      <StyleWrapper>
-        <NewsList
-          news={mockNews}
-          getMoreNews={mockGetMoreNews}
-          loadingNews={true}
-        />
-      </StyleWrapper>
+      <MemoryRouter>
+        <StyleWrapper>
+          <NewsList
+            news={mockNews}
+            getMoreNews={mockGetMoreNews}
+            loadingNews={true}
+          />
+        </StyleWrapper>
+      </MemoryRouter>
     );
 
     const showMoreButton = screen.getAllByRole('button').pop();
     expect(showMoreButton).toBeDisabled();
+  });
+  it('"show more" button does not exist without getMoreNews', () => {
+    render(
+      <MemoryRouter>
+        <StyleWrapper>
+          <NewsList news={mockNews} loadingNews={false} />
+        </StyleWrapper>
+      </MemoryRouter>
+    );
+
+    const showMoreButton = screen.queryByText('show more');
+    expect(showMoreButton).not.toBeInTheDocument();
   });
 });

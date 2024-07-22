@@ -7,7 +7,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: '../node_modules/.vite/ui-hooks',
+  cacheDir: '../../../node_modules/.vite/ui-hooks',
 
   plugins: [
     react(),
@@ -26,7 +26,7 @@ export default defineConfig({
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
-    outDir: '../dist/ui-hooks',
+    outDir: '../../../dist/ui-hooks',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {

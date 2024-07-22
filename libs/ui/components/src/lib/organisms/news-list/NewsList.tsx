@@ -3,14 +3,15 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import styled from '@mui/system/styled';
 
-import type { INewsItem } from '../';
+import type { INews } from '@hacker-news/ui-reducers';
+
 import { NewsItem } from '../';
 import { Button } from '../../atoms';
 
 interface INewsList {
-  news: INewsItem[];
-  getMoreNews: () => void;
-  loadingNews: boolean;
+  news: INews[];
+  getMoreNews?: () => void;
+  loadingNews?: boolean;
 }
 
 const StyledOl = styled('ol')({
@@ -22,21 +23,23 @@ const StyledOl = styled('ol')({
 export const NewsList = ({ news, getMoreNews, loadingNews }: INewsList) => (
   <>
     <List component={StyledOl}>
-      {news.map((item) => (
+      {news.map((item, index) => (
         <ListItem key={item.id} disablePadding>
-          <NewsItem {...item} />
+          <NewsItem {...item} index={index + 1} />
         </ListItem>
       ))}
     </List>
-    <Box marginLeft="42px">
-      <Button
-        onClick={() => {
-          getMoreNews();
-        }}
-        label="show more"
-        loading={loadingNews}
-      />
-    </Box>
+    {!!getMoreNews && (
+      <Box marginLeft="42px">
+        <Button
+          onClick={() => {
+            getMoreNews();
+          }}
+          label="show more"
+          loading={loadingNews}
+        />
+      </Box>
+    )}
   </>
 );
 

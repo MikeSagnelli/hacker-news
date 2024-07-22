@@ -10,15 +10,30 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@hacker-news/ui-components": ["libs/ui/components/src/index.ts"],
-      "@hacker-news/ui-hooks": ["libs/ui/hooks/src/index.ts"],
-      "@hacker-news/ui-utils": ["libs/ui/utils/src/index.ts"]
+      "@hacker-news/ui-reducers": [
+        "libs/ui/reducers/src/index.ts"
+      ],
+      "@hacker-news/ui-components": [
+        "libs/ui/components/src/index.ts"
+      ],
+      "@hacker-news/ui-hooks": [
+        "libs/ui/hooks/src/index.ts"
+      ],
+      "@hacker-news/ui-utils": [
+        "libs/ui/utils/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

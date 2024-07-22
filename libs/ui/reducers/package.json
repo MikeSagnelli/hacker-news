@@ -1,0 +1,15 @@
+{
+  "name": "@hacker-news/ui-reducers",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "dependencies": {
+    "@hacker-news/ui-utils": "^0.0.1"
+  }
+}

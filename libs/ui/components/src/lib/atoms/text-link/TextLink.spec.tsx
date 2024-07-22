@@ -29,15 +29,38 @@ describe('TextLink', () => {
     expect(linkElement).toBeInTheDocument();
   });
 
-  it('handles click event and navigates to the specified URL', () => {
+  it('handles click event and navigates to the specified URL when isExternal is false', () => {
     render(
       <StyleWrapper>
-        <TextLink url="/test">Test Link</TextLink>
+        <TextLink url="/test" isExternal={false}>
+          Test Link
+        </TextLink>
       </StyleWrapper>
     );
     const linkElement = screen.getByText('Test Link');
     fireEvent.click(linkElement);
     expect(mockNavigate).toHaveBeenCalledWith('/test');
+  });
+
+  it('handles click event and opens the URL in a new tab when isExternal is true', () => {
+    const openSpy = jest.spyOn(window, 'open').mockImplementation(() => null);
+
+    render(
+      <StyleWrapper>
+        <TextLink url="https://example.com" isExternal={true}>
+          External Link
+        </TextLink>
+      </StyleWrapper>
+    );
+    const linkElement = screen.getByText('External Link');
+    fireEvent.click(linkElement);
+    expect(openSpy).toHaveBeenCalledWith(
+      'https://example.com',
+      '_blank',
+      'noopener,noreferrer'
+    );
+
+    openSpy.mockRestore();
   });
 
   it('applies the color prop correctly', () => {

@@ -9,20 +9,31 @@ interface ILink extends LinkBaseProps {
   url: string;
   children: ReactNode;
   color?: string;
+  isExternal?: boolean;
 }
 
 const StyledLink = styled(Link)`
   cursor: pointer;
 `;
 
-export const TextLink = ({ url, children, color, ...props }: ILink) => {
+export const TextLink = ({
+  url,
+  children,
+  color,
+  isExternal,
+  ...props
+}: ILink) => {
   const { currentTheme } = useCustomTheme();
   const navigate = useNavigate();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
 
-    navigate(url);
+    if (isExternal) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } else {
+      navigate(url);
+    }
   };
 
   return (

@@ -3,7 +3,10 @@ import IconButton from '@mui/material/IconButton';
 import type { TypographyProps } from '@mui/material/Typography';
 import Typography from '@mui/material/Typography';
 
-import { StarIcon, useCustomTheme } from '../../atoms';
+import { useStarredNews } from '@hacker-news/ui-hooks';
+import { formatNumber, getDomainFromUrl, timeAgo } from '@hacker-news/ui-utils';
+
+import { StarIcon, TextLink, useCustomTheme } from '../../atoms';
 
 interface ISubTypography extends TypographyProps {
   text: string;
@@ -16,13 +19,13 @@ export interface INewsItem {
   url: string;
   author: string;
   score: number;
-  time: string;
+  time: number;
   comments: number;
   starred: boolean;
-  starPost: () => void;
 }
 
 export const NewsItem = ({
+  id,
   index,
   title,
   url,
@@ -31,9 +34,13 @@ export const NewsItem = ({
   time,
   comments,
   starred,
-  starPost,
 }: INewsItem) => {
   const { currentTheme } = useCustomTheme();
+  const { starNews } = useStarredNews();
+  const formattedTime = time ? timeAgo(time) : '';
+  const formattedScore = score ? formatNumber(score) : '';
+  const formattedComments = comments ? formatNumber(comments) : '';
+  const domain = url ? getDomainFromUrl(url) : '';
 
   const SubTypography = ({ text, ...props }: ISubTypography) => (
     <Typography
@@ -74,15 +81,27 @@ export const NewsItem = ({
           >
             {title}
           </Typography>
-          <SubTypography text={`(${url})`} />
+          {url && (
+            <TextLink
+              color={currentTheme.typography.secondaryColor}
+              fontFamily={currentTheme.typography.primaryFontFamily}
+              fontSize={14}
+              fontWeight={400}
+              lineHeight={1}
+              url={url}
+              isExternal
+            >
+              ({domain})
+            </TextLink>
+          )}
         </Grid>
         <Grid alignItems="center" display="flex" flexDirection="row">
           <SubTypography
-            text={`${score} points by ${author} ${time}`}
+            text={`${formattedScore} points by ${author} ${formattedTime}`}
             paddingRight="10px"
           />
           <SubTypography
-            text={`${comments} comments`}
+            text={`${formattedComments} comments`}
             paddingInline="10px"
             borderLeft={`1px solid ${currentTheme.typography.secondaryColor}`}
             borderRight={`1px solid ${currentTheme.typography.secondaryColor}`}
@@ -93,7 +112,7 @@ export const NewsItem = ({
             flexDirection="row"
             gap="3px"
           >
-            <IconButton onClick={starPost} size="small">
+            <IconButton onClick={() => starNews(id)} size="small">
               <StarIcon filled={starred} />
             </IconButton>
             <SubTypography text={starred ? 'saved' : 'save'} />
