@@ -67,5 +67,6 @@
         "unitTestRunner": "jest"
       }
     }
-  }
+  },
+  "nxCloudAccessToken": "${NX_CLOUD_ACCESS_TOKEN}"
 }
