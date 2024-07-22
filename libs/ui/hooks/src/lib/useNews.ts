@@ -1,7 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import type { RootState, AppDispatch, INews } from '@hacker-news/ui-reducers';
+import type {
+  RootState,
+  AppDispatch,
+  INews,
+  NewsState,
+  LatestNewsState,
+} from '@hacker-news/ui-reducers';
 import { fetchLatestNews, fetchNews } from '@hacker-news/ui-reducers';
 
 interface IUseNews {
@@ -17,14 +23,14 @@ export const useNews = (): IUseNews => {
     loading: latestLoading,
     error: latestError,
     data: latestData,
-  } = useSelector((state: RootState) => state.latestNews);
+  } = useSelector((state: RootState) => state.latestNews as LatestNewsState);
   const {
     loading: newsLoading,
     error: newsError,
     data: newsData,
     page: newsPage,
     pageSize: newsPageSize,
-  } = useSelector((state: RootState) => state.news);
+  } = useSelector((state: RootState) => state.news as NewsState);
   const newsIds = latestData.slice(
     newsPage * newsPageSize,
     (newsPage + 1) * newsPageSize

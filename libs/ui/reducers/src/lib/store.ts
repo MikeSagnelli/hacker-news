@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import type { Reducer } from '@reduxjs/toolkit';
+import type { Action, Reducer } from '@reduxjs/toolkit';
 
 import type { LatestNewsState, NewsState } from './reducers';
 import {
@@ -12,15 +12,15 @@ import {
 } from './reducers';
 
 export const reducer: {
-  [key: string]: Reducer<LatestNewsState | NewsState, any>;
+  [key: string]: Reducer<LatestNewsState | NewsState, Action<string>>;
 } = {
   [newsReducerName]: newsSliceReducer as Reducer<
     LatestNewsState | NewsState,
-    any
+    Action<string>
   >,
   [latestNewsReducerName]: latestNewsSliceReducer as Reducer<
     LatestNewsState | NewsState,
-    any
+    Action<string>
   >,
 };
 
