@@ -14,7 +14,7 @@ describe('StarIcon', () => {
     expect(svgElement).toBeInTheDocument();
   });
 
-  it('applies the correct fill color when filled is truthy', () => {
+  it('applies the correct fill and stroke color when filled is truthy', () => {
     render(
       <StyleWrapper>
         <StarIcon filled />
@@ -25,7 +25,10 @@ describe('StarIcon', () => {
       'fill',
       theme.light.typography.accentColor
     );
-    expect(pathElement).not.toHaveAttribute('stroke');
+    expect(pathElement).toHaveAttribute(
+      'stroke',
+      theme.light.typography.accentColor
+    );
   });
 
   it('applies the correct stroke color when filled is falsy', () => {
