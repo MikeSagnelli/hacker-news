@@ -6,6 +6,7 @@ import type { ITheme } from '../../../theme';
 import { createGlobalStyles, theme } from '../../../theme';
 
 interface IStyleWrapper {
+  initialTheme?: ITheme;
   children: ReactNode;
 }
 
@@ -16,8 +17,11 @@ interface IThemeContext {
 
 const CustomThemeContext = createContext<IThemeContext | undefined>(undefined);
 
-export const StyleWrapper = ({ children }: IStyleWrapper) => {
-  const [currentTheme, setCurrentTheme] = useState(theme.light);
+export const StyleWrapper = ({
+  children,
+  initialTheme = theme.light,
+}: IStyleWrapper) => {
+  const [currentTheme, setCurrentTheme] = useState(initialTheme);
 
   const globalStyles = createGlobalStyles(currentTheme);
 

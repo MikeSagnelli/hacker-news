@@ -117,4 +117,24 @@ describe('useNews', () => {
     expect(result.current.newsError).toBe(null);
     expect(result.current.newsData).toEqual([{ id: 2 }]);
   });
+
+  it('should handle errors correctly', () => {
+    useSelectorMock
+      .mockReturnValueOnce({
+        loading: false,
+        error: 'Error fetching latest news',
+        data: [],
+      })
+      .mockReturnValueOnce({
+        loading: false,
+        error: 'Error fetching news',
+        data: [],
+        page: 0,
+        pageSize: 10,
+      });
+
+    const { result } = renderHook(() => useNews());
+
+    expect(result.current.newsError).toBe('Error fetching news');
+  });
 });

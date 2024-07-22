@@ -38,7 +38,7 @@ const latestNewsSlice = createSlice({
       })
       .addCase(fetchLatestNews.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || null;
+        state.error = action.error.message || 'Error fetching latest news';
       });
   },
 });

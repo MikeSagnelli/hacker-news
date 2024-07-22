@@ -20,6 +20,10 @@ describe('Header', () => {
     });
   });
 
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   test('renders Header component', () => {
     render(
       <MemoryRouter>
@@ -29,6 +33,24 @@ describe('Header', () => {
       </MemoryRouter>
     );
     expect(screen.getByRole('banner')).toBeInTheDocument();
+  });
+
+  test('when dark theme toggles theme on button click', () => {
+    mockUseCustomTheme.mockReturnValueOnce({
+      currentTheme: theme.dark,
+      setCurrentTheme,
+    });
+
+    render(
+      <MemoryRouter>
+        <StyleWrapper initialTheme={theme.dark}>
+          <Header />
+        </StyleWrapper>
+      </MemoryRouter>
+    );
+    const themeToggleButton = screen.getByRole('button');
+    fireEvent.click(themeToggleButton);
+    expect(setCurrentTheme).toHaveBeenCalled();
   });
 
   test('toggles theme on button click', () => {

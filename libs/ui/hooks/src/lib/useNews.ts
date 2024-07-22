@@ -35,7 +35,6 @@ export const useNews = (): IUseNews => {
   useEffect(() => {
     if (latestData.length && !latestLoading && !latestError) {
       hasFetchedLatestNews.current = true;
-      return;
     }
 
     if (!hasFetchedLatestNews.current) {

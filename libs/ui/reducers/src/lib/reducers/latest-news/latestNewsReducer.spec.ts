@@ -98,4 +98,19 @@ describe('latestNewsSlice', () => {
       error: mockError.message,
     });
   });
+
+  it('should handle fetch latest news failure without Error object', async () => {
+    (hackerNewsApi.fetchLatestNews as jest.Mock).mockRejectedValue({});
+
+    await store.dispatch(fetchLatestNews() as any);
+
+    expect(
+      (store.getState() as { latestNews: typeof latestNewsInitialState })
+        .latestNews
+    ).toEqual({
+      ...latestNewsInitialState,
+      loading: false,
+      error: 'Error fetching latest news',
+    });
+  });
 });

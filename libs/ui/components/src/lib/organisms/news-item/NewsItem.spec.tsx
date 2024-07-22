@@ -18,6 +18,14 @@ const mockProps = {
   starred: false,
 };
 
+const emptyMockProps = {
+  id: 1,
+  index: 1,
+  title: 'Test Title',
+  author: 'Test Author',
+  starred: false,
+};
+
 describe('NewsItem Component', () => {
   const mockStarNews = {
     starredNews: [],
@@ -44,6 +52,24 @@ describe('NewsItem Component', () => {
       screen.getByText('100 points by Test Author 54 years ago')
     ).toBeInTheDocument();
     expect(screen.getByText('50 comments')).toBeInTheDocument();
+    expect(screen.getByText('save')).toBeInTheDocument();
+  });
+
+  it('renders correctly with empty props', () => {
+    render(
+      <MemoryRouter>
+        <StyleWrapper>
+          {/* @ts-expect-error no props */}
+          <NewsItem {...emptyMockProps} />
+        </StyleWrapper>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByText('1.')).toBeInTheDocument();
+    expect(screen.getByText('Test Title')).toBeInTheDocument();
+    expect(screen.queryByText('(example.com)')).not.toBeInTheDocument();
+    expect(screen.getByText('points by Test Author')).toBeInTheDocument();
+    expect(screen.getByText('comments')).toBeInTheDocument();
     expect(screen.getByText('save')).toBeInTheDocument();
   });
 

@@ -38,6 +38,42 @@ describe('string', () => {
       const unixTime = now - 63072000;
       expect(timeAgo(unixTime)).toBe('2 years ago');
     });
+
+    // Additional tests for edge cases
+    it('should return 1 second ago', () => {
+      const unixTime = now - 1;
+      expect(timeAgo(unixTime)).toBe('1 second ago');
+    });
+
+    it('should return 1 minute ago', () => {
+      const unixTime = now - 60;
+      expect(timeAgo(unixTime)).toBe('1 minute ago');
+    });
+
+    it('should return 1 hour ago', () => {
+      const unixTime = now - 3600;
+      expect(timeAgo(unixTime)).toBe('1 hour ago');
+    });
+
+    it('should return 1 day ago', () => {
+      const unixTime = now - 86400;
+      expect(timeAgo(unixTime)).toBe('1 day ago');
+    });
+
+    it('should return 1 week ago', () => {
+      const unixTime = now - 604800;
+      expect(timeAgo(unixTime)).toBe('1 week ago');
+    });
+
+    it('should return 1 month ago', () => {
+      const unixTime = now - 2592000;
+      expect(timeAgo(unixTime)).toBe('1 month ago');
+    });
+
+    it('should return 1 year ago', () => {
+      const unixTime = now - 31536000;
+      expect(timeAgo(unixTime)).toBe('1 year ago');
+    });
   });
 
   describe('getDomainFromUrl', () => {
@@ -45,12 +81,6 @@ describe('string', () => {
       const url = 'https://www.example.com/path';
       const domain = getDomainFromUrl(url);
       expect(domain).toBe('www.example.com');
-    });
-
-    it('should return an empty string for an invalid URL', () => {
-      const url = 'invalid-url';
-      const domain = getDomainFromUrl(url);
-      expect(domain).toBe('');
     });
 
     it('should log an error for an invalid URL', () => {
