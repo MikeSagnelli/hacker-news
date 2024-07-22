@@ -11,7 +11,7 @@ export const fetchLatestNews = createAsyncThunk(
   }
 );
 
-interface LatestNewsState {
+export interface LatestNewsState {
   data: number[];
   loading: boolean;
   error: string | null;

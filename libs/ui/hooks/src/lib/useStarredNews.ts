@@ -1,6 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import type { RootState, AppDispatch, INews } from '@hacker-news/ui-reducers';
+import type {
+  RootState,
+  AppDispatch,
+  INews,
+  NewsState,
+} from '@hacker-news/ui-reducers';
 import { toggleStarred } from '@hacker-news/ui-reducers';
 
 interface IUseStarredNews {
@@ -10,9 +15,9 @@ interface IUseStarredNews {
 
 export const useStarredNews = (): IUseStarredNews => {
   const dispatch = useDispatch<AppDispatch>();
-  const starredNews = useSelector((state: RootState) => state.news.data).filter(
-    (news) => news.starred
-  );
+  const starredNews = useSelector(
+    (state: RootState) => (state.news as NewsState).data
+  ).filter((news) => news.starred);
 
   const starNews = (newsId: number) => {
     dispatch(toggleStarred(newsId));

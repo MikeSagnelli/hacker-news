@@ -1,4 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
+import type { Action, Reducer } from '@reduxjs/toolkit';
+
+import type { LatestNewsState, NewsState } from './reducers';
 import {
   latestNewsSliceReducer,
   latestNewsReducerName,
@@ -8,12 +11,22 @@ import {
   newsInitialState,
 } from './reducers';
 
-export const reducer = {
-  [newsReducerName]: newsSliceReducer,
-  [latestNewsReducerName]: latestNewsSliceReducer,
+export const reducer: {
+  [key: string]: Reducer<LatestNewsState | NewsState, Action<string>>;
+} = {
+  [newsReducerName]: newsSliceReducer as Reducer<
+    LatestNewsState | NewsState,
+    Action<string>
+  >,
+  [latestNewsReducerName]: latestNewsSliceReducer as Reducer<
+    LatestNewsState | NewsState,
+    Action<string>
+  >,
 };
 
-export const preloadedState = {
+export const preloadedState: {
+  [key: string]: LatestNewsState | NewsState;
+} = {
   [newsReducerName]: newsInitialState,
   [latestNewsReducerName]: latestNewsInitialState,
 };
