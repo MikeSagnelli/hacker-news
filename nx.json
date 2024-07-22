@@ -56,5 +56,5 @@
       }
     }
   },
-  "nxCloudAccessToken": "NGY3NDFkYjYtNTg0NS00ZTA5LWIwYWMtYmE1Y2RjNmY1ZWFjfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "${NX_CLOUD_ACCESS_TOKEN}"
 }
